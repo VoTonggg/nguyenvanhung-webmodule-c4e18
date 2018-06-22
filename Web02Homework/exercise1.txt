@@ -1,0 +1,6 @@
+Không có id nào trùng nhau
+why ? Vì id là đại diện cho tính đặc trưng của mỗi document trong 1 collection. Mỗi document sẽ có 1 id khác nhau để phân biệt
+
+Infomation mà id đại diện cho là tính đặc trưng. Application của id là để truy cập mỗi phaanfturw theo id mà không sợ bị trùng 
+( i think so )
+
