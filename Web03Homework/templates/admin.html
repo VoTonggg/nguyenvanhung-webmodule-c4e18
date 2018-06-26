@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+</head>
+<body>
+    <h1>Admin</h1>
+    <a href="{{ url_for('newservice') }}"><button>Create a new service</button></a>
+    <table border="1px">
+        <thead>
+            <th>Stt</th>
+            <th>Name</th>
+            <th>Yob</th>
+            <th>Gender</th>
+            <th>Height</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Miêu tả</th>
+            <th>Số đo 3 vòng</th>
+            <th>Ảnh</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            {% for service in all_service %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.yob }}</td>
+                    <td>{{ "Male" if service.gender == 1 else "Female" }}</td>
+                    <td>{{ service.height }}</td>
+                    <td>{{ service.phone }}</td>
+                    <td>{{ service.address }}</td>
+                    <td>{{ "Bận" if service.status == False else "Rảnh" }}</td>
+                    <td>{{ service.description }}</td>
+                    <td>{{ service.measurements }}</td>
+                    <td><img src="{{ service.image }} " width="10%"></td>
+                    <td>
+                        <a href="{{ url_for('updateservice', service_id = service.id) }}">Sửa</a>                       
+                        <a href="{{ url_for('delete', service_id = service.id) }}">Xóa</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
