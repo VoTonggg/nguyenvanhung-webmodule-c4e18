@@ -5,17 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Search</title>
+    {% include 'meta-data.html' %}
 </head>
 <body>
-    <h1>Search Page</h1>
-    {% for service in all_service %}
-        <img src= " {{ service.image }} " width = "20%">
-        <p>{{ service.name }}</p>
-        <p>{{ service.yob }}</p>
-        <p>{{ service.height }}</p>
-        <a href=" {{ url_for('detail', service_id=service.id) }}">Chi tiết</a>
-        <br>
-    {% endfor %}
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <h4 class="form-weight-bold mr-3">Danh sách các mặt hàng</h4>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+            <a class="nav-item nav-link active font-weight-bold" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+            </div>
+        </div>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+
+    <div class="h-1000px w-100 d-flex container flex-wrap mt-5">
+        {% for service in all_service %}
+        <div class="w-24 h-300px mr-2">
+            <img src= " {{ service.image }} " width = "100%" height="100%">
+            <p>{{ service.name }}</p>
+            <p>{{ service.yob }}</p>
+            <p>{{ service.height }}</p>
+            <a href=" {{ url_for('detail', service_id=service.id) }}">Chi tiết</a>
+            <br>
+        </div>
+    {% endfor %}
+    </div>
+    
 </body>
 </html>

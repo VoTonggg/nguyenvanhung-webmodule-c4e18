@@ -1,8 +1,10 @@
 from flask import *
 from models.service import Service
+from models.user import User
 import mlab
 
 app = Flask(__name__)
+app.secret_key = "a super super secret key"
 
 mlab.connect()
 
@@ -79,7 +81,37 @@ def updateservice(service_id):
         service.reload()
         return redirect(url_for('admin'))
 
+@app.route('/sign-up', methods = ["GET", "POST"])
+def signup():
+    if request.method == "GET":
+        return render_template('signup.html')
+    else:
+        form = request.form 
 
+        newuser = User(
+            username = form['username'],
+            password = form['password'],
+            email = form['email'],
+            fullname = form['fullname']
+        )
+        newuser.save()
+        return redirect(url_for('index'))
+
+@app.route('/login', methods = ["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        form = request.form
+        username = form['username']
+        password = form['password']
+
+        user_to_find = User.objects(username = username, password = password)
+        if user_to_find is not None:
+            session['loggedin'] = True
+            return user_to_find
+        else:
+            return "Log in failed"
 
 if __name__ == '__main__':
   app.run(debug=True)
